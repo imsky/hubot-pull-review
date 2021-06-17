@@ -95,6 +95,8 @@ module.exports = function generatePlan(options) {
   var pullRequestLabels;
   var pullRequestReviewRequests;
   var useReviewRequests = false;
+  var notifySlack = (process.env.PULL_REVIEW_NOTIFY_SLACK || 'true').toLowerCase() === 'true';
+  var notifyGithub = (process.env.PULL_REVIEW_NOTIFY_GITHUB || 'true').toLowerCase() === 'true';
 
   if (!pullRequestURL) {
     throw Error('Missing pull request URL');
@@ -199,10 +201,14 @@ module.exports = function generatePlan(options) {
         return reviewer.login;
       });
 
-      var channels = ['github'];
+      var channels = [];
 
-      if (isChat && chatChannel) {
+      if (isChat && chatChannel && notifySlack) {
         channels.push(chatChannel);
+      }
+
+      if (notifyGithub) {
+        channels.push('github');
       }
 
       actions.push(

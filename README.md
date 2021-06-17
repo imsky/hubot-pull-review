@@ -295,6 +295,8 @@ An array of pull request labels that are forbidden from pull request review.
 * `PULL_REVIEW_CONFIG_PATH`: location of the config file in the pull request repo (default is `.pull-review`).
 * `PULL_REVIEW_CONFIG`: Pull Review configuration override in JSON/YAML format.
 * `PULL_REVIEW_REQUIRED_ROOMS`: whitelist of Hubot chat rooms for Pull Review requests (e.g. `dev,ops`).
+* `PULL_REVIEW_NOTIFY_SLACK`: send message to slack (default `true`)
+* `PULL_REVIEW_NOTIFY_GITHUB`: send message to the Github pull-request (default `true`)
 
 ## Reviewing again
 
